@@ -1,59 +1,3 @@
-# CTXEngine - Craftix Engine Project
-
-![CTXEngine - Craftix Engine Project](/Resources/Logo/CTXEngine_Logo.png?raw=true "CTXEngine - Craftix Engine Project")
-  
-# Main Parts: 
-   
-**CTXEngine** - is an engine in which I'm writing for games, basically in future for my game. It is written in C++17 and above. And it be support OpenGL, DirectX and maybe Vulcan graphical API's. Also other helps libraries, such a Windowing System like GLFW for Windows, Mac, and Linux on OpenGL, gl math library - GLM and others.
-   
-**Why i'm myself creating this engine if already exist Unity or Unreal?**   
-Because I want to create my own technology, even if it is small at first, which I will eventually develop. I also always wanted to create a game using my own engine.   
-   
-**There will be other people to join the development?**   
-The plan is to attract only one person I know so far. In General, I don't think about it yet. But I think in the future people will be able to offer their ideas and solutions.   
-   
-**What is the purpose of creating this platform?**   
-As you have noticed, I do not call the project a engine, and platform because it will be used not only to create a game, and to create any graphic application I use two-dimensional or three-dimensional graphics.   
-   
-**When is the release planned?**   
-It's even hard for me to say that the engine is moving from alpha to beta, and I didn't even think about the release, since this is my first big project. Who knows maybe in 2-3 years something will come out.   
-   
-### Current version:
-   
-[0.1.21.3.10c](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/log/0.1.21.md) - Render Engine 2D Update     
-The goal of this update is to implement a fully working two-dimensional graphics engine, which means **fast rendering**, **texture/material** support, **particle system**, **two-dimensional animation**, **light** and **shadows**.
-
-### Upcoming version:
-[0.1.22.0.0c](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/log/0.1.22.md) - ECS Update    
-Main goal of this update (Entity-Component-System) that make game develepers live easier. ECS follows the composition over inheritance principle that allows greater flexibility in defining entities where every object in a game's scene is an entity (e.g. enemies, bullets, vehicles, etc.). In CTXEngine 'Entity' will be a GameObject.   
-[0.1.23.0.0c](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/log/0.1.23.md) - The Editor Update   
-For this update goal is to create a basic level editor for CTXEngine, to game developers can create scenes and load it to application.  
-
-### Engine parts:
-   
-> [CTX Core](https://github.com/KennyProgrammer/CTXEngine/tree/master/CTXEngine/Sources/CTXEngine/Core) - 
-The basic Core of this engine.  
-> [CTX Graphics](https://github.com/KennyProgrammer/CTXEngine/tree/master/CTXEngine/Sources/CTXEngine/Core) - 
-Multi-API Graphics abstraction.   
-> [CTX Audio](https://github.com/KennyProgrammer/CTXAudio) - 
-CTX Audio library, now using Open GL Soft.  
-> [CTX Math](https://github.com/KennyProgrammer/CTXML) - 
-CTX Mathimatics library, support Vectors, Matrices.    
-
-# Quick Setup:
-### Install   
-To quickly install and configure this engine on Windows so that it can be run in Visual Studio 2019, you must:
-   
-- Download and install Git For Windows: https://gitforwindows.org/ and **don't forget to connect the git to the console** during installation, otherwise the installer will issue errors.
-- Download or copy Build/Command Master Install.bat file   
-- Open it and he do all stuff what you need to run from VisualStudio 2019.
-   
-### Project Setup 
-After starting Visual Studio, you will have the `"Application"` project, which is what you need. If you want to change the project name, you need to go to the engine directory `C:\CTXEngine`, open the `premake5.lua` file, and there find the project `"Application"` line. You can change the project and location parameters to your own name. You can also change the `Application.rc` file below.   
-   
-**I strongly do not recommend changing other parameters, because then the engine may fly, and I can't help you. In the future, it will all be automated or in some editor.**
-   
-If something going wrong read this [full documentation](https://github.com/KennyProgrammer/CTXEngine/tree/master/.github/PrepareProject.md).
 # Example Application:
 ### Main Creation   
 First you need create some header file with basic constructor and destructor. Let's it be `ExampleApp.h` to hold basic information and instance's of you're application. Then in your header include `CTXEngine.h`, to connect all engine API's.
@@ -66,11 +10,32 @@ class ExampleApp : public СTXEngine::Core::CoreApp
 {
   public:
     ExampleApp();
-    ~ExampleApp();
+    ~ExampleApp() = default;
 };
 ```
 As you may have noticed, our `ExampleApp` class must inherit from the main engine `CoreApp` class for applications. You must inherit from it because it is the entry point for your application. We'll talk about it later.   
 If you want, you can also include the namespace `СTXEngine::Core` to not write something like `CTXEngine::Core::CoreApp`. This is not necessary just for the convenience of the programmer. 
+   
+Here all list of namespaces/folders of CTXEngine.
+   
+```cpp
+using namespace CTXEngine;
+using namespace CTXEngine::Core;
+using namespace CTXEngine::Core::IO;
+using namespace CTXEngine::Graphics;
+using namespace CTXEngine::Graphics::GL;
+using namespace CTXEngine::Graphics::VK;
+using namespace CTXEngine::Graphics::D3D;
+using namespace CTXEngine::Audio;
+using namespace CTXEngine::Windows;
+using namespace CTXEngine::Maths;
+using namespace CTXEngine::Editor;
+```
+   
+Let's start with `CTXEngine` namespace. This is the most important folder where the main tools, includs, and settings are stored. `CTXEngine::Core` is designed for the engine core. it stores all the most important things for the engine and your application. So it contains `::IO` namespace where events, input, and output are stored. In `CTXEngine::Graphics` as you have already understood everything is stored related to graphics, graphics engines, and so on. Inside it there are namespaces `::GL`, `::VK`, `::D3D` that display each API. You don't need to use them this is only for the engine developers side. Next comes the `CTXEngine::Audio` designed for audio and store the Audio Engine. What you will need to use quite often so it `CTXEngine::Math`. This namespace stores vectors, matrices, and all that crap about math and computing. `CTXEngine::Windows` stores Windows for different platforms. You won't need to use it, either.
+   
+For now let's just connect few important namespaces.
+
 ```cpp
 using namespace CTXEngine;
 using namespace CTXEngine::Core;
@@ -80,7 +45,7 @@ using namespace CTXEngine::*;
 And in principle, the header file is ready. Now we can create an implementing file `ExampleApp.cpp` where you need to include three main files.
 ```cpp
 #include "CTXEnginePreCompile.h"
-#include "ExampleApp.h"
+#include "ExampleApp.h" 
 #include "CTXEngine/Main.cpp"
 ```
 `CTXEnginePreCompile.h` is a engine pre complie header, its contains all c++ standard libraries. It **must** be included in the file, otherwise you will get the ```fatal error C1083: Cannot open precompiled header file: CTXEnginePreCompile.h```.   
@@ -88,7 +53,7 @@ And in principle, the header file is ready. Now we can create an implementing fi
    
 The files must be included in the order shown above. Because the compiler checks the file first when compiling. Therefore, the application files and `Main.h` entry points are already available. 
    
-Before implementing the constructor and other functions created in the `ExampleApp.h` you need to add the most important function to create and run the ExampleApp application. We go down to the bottom `ExampleApp.cpp` file and add the `CTXEngine::createApp()` function that will return `CTXEngine::Core::CoreApp*`.
+Before implementing the constructor and other functions created in the `ExampleApp.h` you need to add the most important function to create and run the ExampleApp application. We go down to the bottom `ExampleApp.cpp` file and add the `CTXEngine::runCore()` function that will return `CTXEngine::Core::CoreApp*`.
 ```cpp
 ...
 
@@ -100,7 +65,7 @@ CTXEngine::Core::CoreApp* CTXEngine::createApp() noexcept
 ```
 It **must** be at the **bottom** of this file, otherwise you will get an error something like this 
 ```cpp
-unresolved external symbol "class CTXEngine::Core::CoreApp * __cdecl CTXEngine::createApp(void)" referenced in function main Application  C:\CTXEngine\Application\ExampleApp.obj
+unresolved external symbol "class CTXEngine::Core::CoreApp * __cdecl CTXEngine::runCore(void)" referenced in function main Application  C:\CTXEngine\Application\ExampleApp.obj
 ````
 It will be easier in the future, but for now, this is it.
    
@@ -110,12 +75,10 @@ Now we can declare our constructor, destructor and application functions.
 
 ...
 
-ExampleApp::~ExampleApp() {}
-
 ExampleApp::ExampleApp()
 	: CoreApp()
 {
-   //do some stuff, for example setup static instance. See below.
+   //do some stuff, for example setup static instance/reference. see below.
 }
 
 ...
@@ -125,7 +88,8 @@ And that's it! Of the base and main things, we have done everything. Now you can
 ![Application Window](/Resources/.github/tut1.png?raw=true "Application Window")
 But when your try to move this panel in window then you will see something similar to this   
 ![Application Window Glitch](/Resources/.github/tut2.png?raw=true "Application Window Glitch")
-This is because we clear the screen when trying to draw a new frame. To access the engine loop, we need to configure the scene. But first, let's setup our own configurations.
+This is because we clear the screen when trying to draw a new frame. To access the engine loop, we need to configure the scene. But first, let's create our own configuration class.
+
 ### Custom configurations
 When you first configure and run the engine you will have by default are the default settings of window and so on. If you want to add or change your app's settings you will need to use function 
 ```cpp
@@ -143,7 +107,7 @@ Let's back to our `ExampleApp.cpp` file and in constructor set few configuration
 ExampleApp::ExampleApp()
 	: CoreApp()
 {
-	this->setParam(CTX_PARAM_APP_NAME, "ExampleApp");
+	this->setParam(CTX_PARAM_APP_NAME, "Example App");
 	this->setParam(CTX_PARAM_WINDOW_WIDTH, 1200);
 	this->setParam(CTX_PARAM_WINDOW_HEIGHT, 720);
 	this->setParam(CTX_PARAM_WINDOW_FULLSCREEN, false);
@@ -174,6 +138,7 @@ CTX_PARAM_WINDOW_VSYNC
 CTX_PARAM_WINDOW_ICON      
 CTX_PARAM_WINDOW_ICON_SM    
 ```
+...
 
 ### Application static instance
 If you need to statically access your `ExampleApp` application and not the engine `CoreApp` class, you will need your own static instance to do this. This is done very simply.
@@ -296,12 +261,11 @@ void ExampleScene::onRender()
 	RenderEngine2D::begin(cameraController);
 	{
 		//render some object
-		RenderEngine2D::renderRectangle({ 0, 0 }, { 1, 1 }, {1, 1, 1, 1});
 	}
 	RenderEngine2D::end();
 }
 
-void ExampleScene::onRenderGui()
+void ExampleScene::onRenderImGui()
 {
 	return;
 }
@@ -318,7 +282,6 @@ Also begin new rendering scene we need have the basic camera. In `CTXEngine::Com
 	RenderEngine2D::begin(cameraController.getCamera());
 	{
 		//render primitives.
-		RenderEngine2D::renderRectangle({ 0, 0 }, { 1, 1 }, {1, 1, 1, 1});
 	}
 	RenderEngine2D::end();
 ```
@@ -329,49 +292,7 @@ Between `begin()` and `end()` from `CTXEngine::Graphics::RenderEngine2D` has a d
 this->elemContainer.addElementLast(new ExampleScene());
 ``` 
 You can use two ways to do this by `addElementLast()` to add scene to end of container, and `addElement()` to add scene to begin of container. And after that you can run your app with peace of mind.
-   
-[Full Documentation](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/CreateApplicationTutorial.md)   
-
-### CTX Editor and GCS  
-Starts work on in-engine editor and GCS. Coming soon...  
-
-# Additional Information
-### Global version in development:
-
-0.1.22.0.0 - ECS Update 
-0.1.23.0.0 - The Editor Update 
-
-### Updates part of ECS Update:
-
-0.1.21.3.10c - First step to Editor and ECS.
-
-### Updates part of Core Pipeline Update (Java):
-
-0.1.20.1.2j - Include support basic Open GL (Deprecated)
-
-### Previous updates:
-
-0.1.20 - Core Pipeline Update   
-0.1.19 - The Final Fixable Update (Lwjgl 3)  
-0.0.19 - The Final Fixable Update (Lwjgl 2)  
-0.0.18 - Multiplayer Test Update  
-0.0.17 - Menu 2.0  
-0.0.16 - Second Button Fixable Update  
-0.0.15 - Rotateble Menu Skybox  
-0.0.14 - First Button Fixable Update  
-0.0.13 - Text 2.0  
-0.0.12 - Audio Update  
-0.0.11 - First Menu  
-0.0.11be - Bogdan Edition  
-
-### Further very-very small builds:  
-
-0.0.1 - 0.0.10  
-
-In these versions, basically everything started, from the first display to the first Gui screen.   
-
-# Else:
-
-The release date (0.1.21) is not even known to me yet, so it will not be possible to test the engine in the near future.
-
-This project first of all evolution me as a programmer. My career started when i thoght make simple game on java language. And this game inspired me to start working on game engine. Actually this game and engine bring me here :D  
+  
+### Full Code
+[Example Application](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/ExampleApplication.md)   
+[Example Graphics Application](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/ExampleGraphicsApplication.md) 
