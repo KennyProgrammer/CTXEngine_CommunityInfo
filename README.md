@@ -59,12 +59,23 @@ use two-dimensional or three-dimensional graphics.
    
 **When is the release planned?**   
 It's even hard for me to say that the engine is moving from alpha to beta, and 
-I didn't even think about the release, since this is my first big project. Who 
-knows maybe in 2-3 years something will come out.   
+I didn't even think about the release, since this is my first big project.    
    
+**Where can I view the list of add-ons?** 
+- [x] Core
+- [x] Window System
+- [x] Graphics 2D
+- [ ] Graphics 3D
+- [ ] Scene Managment
+- [ ] Physics
+- [ ] Audio
+- [ ] Editor Tool
+- [ ] Multiplaform Support (Windows, Linux, Mac)
+- [ ] Multigraphics API (OpenGL, DirectX, Vulkan, Metal, Mantle)
+
 ### Current Version:
    
-[0.1.21.3.12c](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/log/0.1.21.md) - Render Engine 2D Update     
+[0.1.21.5.0c](https://github.com/KennyProgrammer/CTXEngine/blob/master/.github/log/0.1.21.md) - Render Engine 2D Update     
 The goal of this update is to implement a fully working two-dimensional graphics
 engine, which means **fast rendering**, **texture/material** support, 
 **particle system**, **two-dimensional animation**, **light** and **shadows**.
@@ -301,7 +312,7 @@ ExampleApp::ExampleApp()
 ...
 ```
 ### Scenes
-In develepment...
+In develepment... (Works on 0.1.20.4.0 or lower.)
 
 While I'm working on the engine itself and I don't have time yet to create 
 the Scene-GameObject-Component system in general scripting, I created a small
@@ -461,7 +472,7 @@ Starts work on in-engine editor and GCS. Coming soon...
 
 ### Updates Part Of ECS Update
 
-0.1.21.3.12c - EnTT and Core Refactoring
+0.1.21.5.0c - ECS: Added Components, GameObject and Scene classes
 
 ### Previous Updates
 
@@ -495,6 +506,7 @@ first Gui screen.
 - imgui
 - spdlog
 - glad
+- entt
 
 # License
 Code and documentation Copyright (c) 2019-2020 Dukhovenko Danila.   
